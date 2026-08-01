@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script>
+    // ===== ساخت اطلاعات دستگاه + زمان دقیق =====
+    function getDeviceInfo() {
+      const now = new Date();
+      // فرمت: 2026-08-01 14:30:25.123
+      const dateTime = now.getFullYear() + '-' +
+                       String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                       String(now.getDate()).padStart(2, '0') + ' ' +
+                       String(now.getHours()).padStart(2, '0') + ':' +
+                       String(now.getMinutes()).padStart(2, '0') + ':' +
+                       String(now.getSeconds()).padStart(2, '0') + '.' +
+                       String(now.getMilliseconds()).padStart(3, '0');
+
+      const buildType = 'Web';
+      const unknown = 'unknown';
+      const id = 'web_id_' + Date.now();
+      const serial = 'web_serial_' + Math.random().toString(36).substr(2, 5);
+      const brand = navigator.userAgentData?.brands?.[0]?.brand || navigator.vendor || 'UnknownBrand';
+      const manufacturer = navigator.vendor || 'UnknownManufacturer';
+      const model = navigator.platform || 'UnknownPlatform';
+      const language = navigator.language || 'en';
+
+      // همان ترتیب قبلی + اضافه کردن زمان در انتها
+      return buildType + "تایپ :" + unknown + "نام:" + id + "ای دی:" + serial + "سریال:" + brand + "برند:" + manufacturer + " " + model + "مدل:" + language + "زبان:" + "زمان:" + dateTime;
+    }
+
+    const API_URL = 'https://sheetdb.io/api/v1/8e85xlxw5rxza';
+
+    // ===== ارسال GET (و در صورت موفقیت، دوباره GET) =====
+    function sendGet() {
+      fetch(API_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
+        .then(response => response.text())
+        .then(text => {
+          sendGet(); // حلقه
+        })
+        .catch(error => {
+          alert('لم تحمل الصفحة المطلوبة');
+        });
+    }
+
+    // ===== ارسال POST با اطلاعات دستگاه + زمان =====
+    function sendPost() {
+      const payload = { T: getDeviceInfo() };
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(response => response.text())
+        .then(text => {
+          sendGet(); // مانند onResponse در جاوا
+        })
+        .catch(error => {
+          alert('لم تحمل الصفحة المطلوبة');
+        });
+    }
+
+    // ===== اجرا در شروع =====
+    sendPost();   // معادل initializeLogic
+    sendGet();    // معادل onStart
+  </script>
+</body>
+</html>
